@@ -54,7 +54,8 @@ async def _hi(ctx: SlashContext):
 @slash.slash(name="drake", description="Sends a photo of drake")
 async def _drake(ctx: SlashContext):
     file_path = 'drake.gif'  # Make sure this path is correct
-    file = File(file_path)
+    spoiler_file_path = f"SPOILER_{file_path}"  # Prefix the filename with 'SPOILER_'
+    file = File(fp=file_path, filename=spoiler_file_path)  # Set the filename parameter to the spoiler version
     await ctx.send(file=file)
 
 # Slash command for /milmoi
@@ -68,14 +69,11 @@ async def _milmoi(ctx: SlashContext):
              ])
 async def _tabinet(ctx: SlashContext, numar: str =""):
     numar = int(numar)
-    if(numar > 10000000000 or numar < -100000000000):
-        await ctx.send(content="Taci in pula mea Stefan")
-    else:
-        await ctx.send(content="I choose...")
-        sleep(2)
-        numar = int(numar) + 1
-        numar = str(numar)
-        await ctx.send(content= numar +", skill issue you lost")
+    await ctx.send(content="I choose...")
+    sleep(2)
+    numar = int(numar) + 1
+    numar = str(numar)
+    await ctx.send(content= numar +", skill issue you lost")
 
 # Slash command for /help
 @slash.slash(name="help", description="Shows this message")
