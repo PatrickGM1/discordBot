@@ -55,8 +55,11 @@ async def _milmoi(ctx: SlashContext):
                  create_option(name="numar", description="insert a number", option_type=3, required=True)
              ])
 async def _tabinet(ctx: SlashContext, numar: str =""):
+    if(numar == "NaN" || numar > 10000000000){
+        await ctx.send(content="Taci in pula mea Stefan")
+    }
     await ctx.send(content="I choose...")
-    sleep(5)
+    sleep(2)
     numar = int(numar) + 1
     numar = str(numar)
     await ctx.send(content= numar +", skill issue you lost")
