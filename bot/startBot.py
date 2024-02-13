@@ -4,7 +4,7 @@ from time import sleep
 from discord.ext.commands import Bot, has_permissions, MissingPermissions
 from discord_slash import SlashCommand, SlashContext
 from discord_slash.utils.manage_commands import create_option
-
+from discord import File
 # Create a bot instance with specific intents
 intents = Intents.default()
 intents.members = True  # Enable member intents
@@ -14,7 +14,7 @@ slash = SlashCommand(bot, sync_commands=True)  # Enable slash commands
 # Event listener for when the bot is ready
 @bot.event
 async def on_ready():
-    print(f"{bot.user.name} has connected to Discord!")
+    print(f"{bot.user.name} is up and running!")
 
 # Error handling for missing permissions for text-based commands
 @bot.event
@@ -49,6 +49,13 @@ async def on_member_join(member):
 @slash.slash(name="hi", description="Says hi!")
 async def _hi(ctx: SlashContext):
     await ctx.send(content="Hi!")
+
+
+@slash.slash(name="drake", description="Sends a photo of drake")
+async def _drake(ctx: SlashContext):
+    file_path = 'drake.gif'  # Make sure this path is correct
+    file = File(file_path)
+    await ctx.send(file=file)
 
 # Slash command for /milmoi
 @slash.slash(name="milmoi", description="Says milmoi!")
@@ -117,21 +124,31 @@ async def _ban(ctx: SlashContext, user: Member, reason: str = "No reason provide
 @has_permissions(manage_roles=True)
 async def _mute(ctx: SlashContext, user: Member):
     muted_role = discord.utils.get(ctx.guild.roles, name="Muted")
+    member_role = discord.utils.get(ctx.guild.roles, name= "Member")
     if muted_role:
         await user.add_roles(muted_role)
+        await user.remove_roles(member_role)
         await ctx.send(f"{user.mention} has been muted.")
-
+    else:
+        await ctx.send("No 'Muted' role found. Please create a 'Muted' role with appropriate permissions.")
 
 # Slash command for /unmute
-@slash.slash(name="unmute", description="Mute a user in the server", options=[
-                 create_option(name="user", description="The user to mute", option_type=6, required=True)
+@slash.slash(name="unmute", description="Unmute a user in the server", options=[
+                 create_option(name="user", description="The user to unmute", option_type=6, required=True)
              ])
 @has_permissions(manage_roles=True)
 async def _unmute(ctx: SlashContext, user: Member):
     muted_role = discord.utils.get(ctx.guild.roles, name="Muted")
-    if muted_role:
+    member_role = discord.utils.get(ctx.guild.roles, name="Member")
+
+    if muted_role in user.roles:  # Check if the user has the "Muted" role
         await user.remove_roles(muted_role)
-        await ctx.send(f"{user.mention} has been muted.")
+        if member_role:  # Ensure the "Member" role exists before adding it back
+            await user.add_roles(member_role)
+        await ctx.send(f"{user.mention} has been unmuted.")
+    else:
+        await ctx.send(f"{user.mention} is not muted.")  # Inform that the user is not muted
+
 
 # Error handling for missing permissions
 @bot.event
@@ -142,4 +159,3 @@ async def on_command_error(ctx, error):
 # Run the bot
 
 bot.run('ODE4MDg0Njg5MTA5NDUwNzgy.GO3XIq.XuAgxpoLyZt8ZjgazydExFmgvPvqJhRK_TFWg4')
-
