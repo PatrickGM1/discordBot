@@ -50,11 +50,13 @@ async def _milmoi(ctx: SlashContext):
     await ctx.send(content="Milmoi!")
 
 # Slash command for /tabinet
-@slash.slash(name="tabine", description="Says milmoi!")
-async def _tabinet(ctx: SlashContext):
-   await ctx.send(content="Let's play a game!") 
-   msg = await client.wait_for("Type a number, let's see if you win", check=check, timeout=60)
-   await ctx.send(content="You chose" + msg) 
+@slash.slash(name="tabinet", description="Let's play a game", options=[
+                 create_option(name="numar", description="insert a number", option_type=3, required=True)
+             ])
+async def _tabinet(ctx: SlashContext, numar: str =""):
+    numar = int(numar) + 1
+    numar = str(numar)
+    await ctx.send(content= numar +", I won")
 
 # Slash command for /help
 @slash.slash(name="help", description="Shows this message")
