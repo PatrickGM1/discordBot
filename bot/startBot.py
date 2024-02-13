@@ -27,6 +27,11 @@ async def on_member_join(member):
 async def _hi(ctx: SlashContext):
     await ctx.send(content="Hi!")
 
+# Slash command for /milmoi
+@slash.slash(name="milmoi", description="Says milmoi!")
+async def _milmoi(ctx: SlashContext):
+    await ctx.send(content="Milmoi!")
+
 # Slash command for /help
 @slash.slash(name="help", description="Shows this message")
 async def _help(ctx: SlashContext):
