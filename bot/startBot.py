@@ -51,8 +51,10 @@ async def _milmoi(ctx: SlashContext):
 
 # Slash command for /tabinet
 @slash.slash(name="tabine", description="Says milmoi!")
-async def _tabinet(interaction: discord.Interaction, user_input: str):
-    await interaction.response.send_message(user_input)
+async def _tabinet(ctx: SlashContext):
+   await ctx.send(content="Let's play a game!") 
+   msg = await client.wait_for("Type a number, let's see if you win", check=check, timeout=60)
+   await ctx.send(content="You chose" + msg) 
 
 # Slash command for /help
 @slash.slash(name="help", description="Shows this message")
