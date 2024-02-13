@@ -35,8 +35,13 @@ async def on_slash_command_error(ctx: SlashContext, error):
 
 # Event listener for new member join
 @bot.event
+@bot.event
 async def on_member_join(member):
     welcome_channel = bot.get_channel(1196434128812384308)  # Replace with your channel ID
+    autorole_name = 'Member'  # Replace with your role name
+    role = discord.utils.get(member.guild.roles, name=autorole_name)
+    await member.add_roles(role)
+
     if welcome_channel:
         await welcome_channel.send(f"Hello {member.mention}, welcome to the server!")
 
@@ -115,8 +120,18 @@ async def _mute(ctx: SlashContext, user: Member):
     if muted_role:
         await user.add_roles(muted_role)
         await ctx.send(f"{user.mention} has been muted.")
-    else:
-        await ctx.send("No 'Muted' role found. Please create a 'Muted' role with appropriate permissions.")
+
+
+# Slash command for /unmute
+@slash.slash(name="unmute", description="Mute a user in the server", options=[
+                 create_option(name="user", description="The user to mute", option_type=6, required=True)
+             ])
+@has_permissions(manage_roles=True)
+async def _unmute(ctx: SlashContext, user: Member):
+    muted_role = discord.utils.get(ctx.guild.roles, name="Muted")
+    if muted_role:
+        await user.remove_roles(muted_role)
+        await ctx.send(f"{user.mention} has been muted.")
 
 # Error handling for missing permissions
 @bot.event
