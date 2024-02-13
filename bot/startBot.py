@@ -1,5 +1,6 @@
 import discord
 from discord import Intents, Embed, Member
+from time import sleep
 from discord.ext.commands import Bot, has_permissions, MissingPermissions
 from discord_slash import SlashCommand, SlashContext
 from discord_slash.utils.manage_commands import create_option
@@ -50,13 +51,15 @@ async def _milmoi(ctx: SlashContext):
     await ctx.send(content="Milmoi!")
 
 # Slash command for /tabinet
-@slash.slash(name="tabinet", description="Let's play a game", options=[
+@slash.slash(name="tabinet", description="Let's play a game, choose a number", options=[
                  create_option(name="numar", description="insert a number", option_type=3, required=True)
              ])
 async def _tabinet(ctx: SlashContext, numar: str =""):
+    await ctx.send(content="I choose...")
+    sleep(5)
     numar = int(numar) + 1
     numar = str(numar)
-    await ctx.send(content= numar +", I won")
+    await ctx.send(content= numar +", skill issue you lost")
 
 # Slash command for /help
 @slash.slash(name="help", description="Shows this message")
