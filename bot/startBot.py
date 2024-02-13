@@ -32,6 +32,11 @@ async def _hi(ctx: SlashContext):
 async def _milmoi(ctx: SlashContext):
     await ctx.send(content="Milmoi!")
 
+# Slash command for /tabinet
+@slash.slash(name="tabine", description="Says milmoi!")
+async def _tabinet(interaction: discord.Interaction, user_input: str):
+    await interaction.response.send_message(user_input)
+
 # Slash command for /help
 @slash.slash(name="help", description="Shows this message")
 async def _help(ctx: SlashContext):
