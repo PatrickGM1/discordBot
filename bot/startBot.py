@@ -15,6 +15,23 @@ slash = SlashCommand(bot, sync_commands=True)  # Enable slash commands
 async def on_ready():
     print(f"{bot.user.name} has connected to Discord!")
 
+# Error handling for missing permissions for text-based commands
+@bot.event
+async def on_command_error(ctx, error):
+    if isinstance(error, MissingPermissions):
+        await ctx.send("You don't have permission to do that!")
+
+# Error handling for slash commands, including missing permissions
+@bot.event
+async def on_slash_command_error(ctx: SlashContext, error):
+    # Check if the error is due to missing permissions
+    if "missing_permissions" in str(error).lower():
+        await ctx.send(content="You do not have permission to use this command!", hidden=True)
+    else:
+        # Handle other errors here
+        pass
+
+
 # Event listener for new member join
 @bot.event
 async def on_member_join(member):
