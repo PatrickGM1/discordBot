@@ -5,6 +5,8 @@ from discord.ext.commands import Bot, has_permissions, MissingPermissions
 from discord_slash import SlashCommand, SlashContext
 from discord_slash.utils.manage_commands import create_option
 from discord import File
+
+
 # Create a bot instance with specific intents
 intents = Intents.default()
 intents.members = True  # Enable member intents
@@ -15,7 +17,7 @@ slash = SlashCommand(bot, sync_commands=True)  # Enable slash commands
 @bot.event
 async def on_ready():
     print(f"{bot.user.name} is up and running!")
-
+    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="manele"))
 # Error handling for missing permissions for text-based commands
 @bot.event
 async def on_command_error(ctx, error):
@@ -51,12 +53,12 @@ async def _hi(ctx: SlashContext):
     await ctx.send(content="Hi!")
 
 
-@slash.slash(name="drake", description="Sends a photo of drake")
+"""@slash.slash(name="drake", description="Sends a photo of drake")
 async def _drake(ctx: SlashContext):
     file_path = 'drake.gif'  # Make sure this path is correct
     spoiler_file_path = f"SPOILER_{file_path}"  # Prefix the filename with 'SPOILER_'
     file = File(fp=file_path, filename=spoiler_file_path)  # Set the filename parameter to the spoiler version
-    await ctx.send(file=file)
+    await ctx.send(file=file)"""
 
 # Slash command for /milmoi
 @slash.slash(name="milmoi", description="Says milmoi!")
@@ -70,7 +72,7 @@ async def _milmoi(ctx: SlashContext):
 async def _tabinet(ctx: SlashContext, numar: str =""):
     numar = int(numar)
     await ctx.send(content="I choose...")
-    sleep(2)
+    sleep(1)
     numar = int(numar) + 1
     numar = str(numar)
     await ctx.send(content= numar +", skill issue you lost")
