@@ -16,7 +16,7 @@ slash = SlashCommand(bot, sync_commands=True)  # Enable slash commands
 @bot.event  # Event listener for when the bot is ready
 async def on_ready():
     print(f"{bot.user.name} is up and running!")
-    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="manele"))
+    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="☭USSR Anthem☭"))
 
 
 @bot.event  # Error handling for missing permissions for text-based commands
