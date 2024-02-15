@@ -69,8 +69,8 @@ async def _milmoi(ctx: SlashContext):
 ])
 async def _tabinet(ctx: SlashContext, numar: str = ""):
     numar = int(numar)
-    await ctx.send(content="I choose...")
-    sleep(1)
+    await ctx.send(content="The government is choosing...")
+    sleep(0.5)
     numar = int(numar) + 1
     numar = str(numar)
     await ctx.send(content=numar + ", you lost blyat")
