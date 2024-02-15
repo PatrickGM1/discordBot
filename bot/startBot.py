@@ -48,15 +48,15 @@ async def on_member_join(member):
 
 @slash.slash(name="hi", description="Says hi!")  # Slash command for /hi
 async def _hi(ctx: SlashContext):
-    await ctx.send(content="Hi!")
+    await ctx.send(content="Hello comrade")
 
 
-"""@slash.slash(name="drake", description="Sends a photo of drake")
+@slash.slash(name="drake", description="Sends a photo of drake")
 async def _drake(ctx: SlashContext):
     file_path = 'drake.gif'  # Make sure this path is correct
     spoiler_file_path = f"SPOILER_{file_path}"  # Prefix the filename with 'SPOILER_'
     file = File(fp=file_path, filename=spoiler_file_path)  # Set the filename parameter to the spoiler version
-    await ctx.send(file=file)"""
+    await ctx.send(file=file)
 
 
 @slash.slash(name="milmoi", description="Says milmoi!")  # Slash command for /milmoi
@@ -73,7 +73,7 @@ async def _tabinet(ctx: SlashContext, numar: str = ""):
     sleep(1)
     numar = int(numar) + 1
     numar = str(numar)
-    await ctx.send(content=numar + ", skill issue you lost")
+    await ctx.send(content=numar + ", you lost blyat")
 
 
 @slash.slash(name="help", description="Shows this message")  # Slash command for /help
@@ -93,9 +93,9 @@ async def _help(ctx: SlashContext):
     create_option(name="reason", description="The reason for kicking", option_type=3, required=False)
 ])
 @has_permissions(kick_members=True)
-async def _kick(ctx: SlashContext, user: Member, reason: str = "No reason provided"):
+async def _kick(ctx: SlashContext, user: Member, reason: str = "deserting"):
     await user.kick(reason=reason)
-    await ctx.send(f"User {user.name} has been kicked for: {reason}")
+    await ctx.send(f"{user.name} has been deported from our server for: {reason}")
 
 
 @slash.slash(name="warn", description="Warn a user", options=[  # Slash command for /warn
@@ -104,8 +104,8 @@ async def _kick(ctx: SlashContext, user: Member, reason: str = "No reason provid
     create_option(name="reason", description="The reason for the warning", option_type=3, required=False)
 ])
 @has_permissions(manage_messages=True)
-async def _warn(ctx: SlashContext, user: Member, reason: str = "No reason provided"):
-    await ctx.send(f"{user.mention}, you have been warned for: {reason}")
+async def _warn(ctx: SlashContext, user: Member, reason: str = "being naughty"):
+    await ctx.send(f"Be careful {user.mention} comrade, you have been warned for: {reason}")
 
 
 @slash.slash(name="ban", description="Ban a user from the server", options=[  # Slash command for /ban
@@ -113,9 +113,9 @@ async def _warn(ctx: SlashContext, user: Member, reason: str = "No reason provid
     create_option(name="reason", description="The reason for banning", option_type=3, required=False)
 ])
 @has_permissions(ban_members=True)
-async def _ban(ctx: SlashContext, user: Member, reason: str = "No reason provided"):
+async def _ban(ctx: SlashContext, user: Member, reason: str = "deserting"):
     await user.ban(reason=reason)
-    await ctx.send(f"User {user.name} has been banned for: {reason}")
+    await ctx.send(f"User {user.name} has been exiled from our server for:: {reason}")
 
 
 @slash.slash(name="mute", description="Mute a user in the server", options=[  # Slash command for /mute
