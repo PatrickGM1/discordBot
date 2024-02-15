@@ -128,7 +128,7 @@ async def _mute(ctx: SlashContext, user: Member):
     if muted_role:
         await user.add_roles(muted_role)
         await user.remove_roles(member_role)
-        await ctx.send(f"{user.mention} has been muted.")
+        await ctx.send(f"{user.mention} has been silenced by the government.")
     else:
         await ctx.send("No 'Muted' role found. Please create a 'Muted' role with appropriate permissions.")
 
@@ -145,7 +145,7 @@ async def _unmute(ctx: SlashContext, user: Member):
         await user.remove_roles(muted_role)
         if member_role:  # Ensure the "Member" role exists before adding it back
             await user.add_roles(member_role)
-        await ctx.send(f"{user.mention} has been unmuted.")
+        await ctx.send(f"{user.mention}'s right to speak was retrieved.")
     else:
         await ctx.send(f"{user.mention} is not muted.")  # Inform that the user is not muted
 
