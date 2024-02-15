@@ -5,7 +5,7 @@ from discord.ext.commands import Bot, has_permissions, MissingPermissions
 from discord_slash import SlashCommand, SlashContext
 from discord_slash.utils.manage_commands import create_option
 from discord import File
-
+import random
 # Create a bot instance with specific intents
 intents = Intents.default()
 intents.members = True  # Enable member intents
@@ -73,8 +73,11 @@ async def _tabinet(ctx: SlashContext, numar: str = ""):
     sleep(0.5)
     numar = int(numar) + 1
     numar = str(numar)
-    await ctx.send(content=numar + ", you lost blyat")
-
+    gen = random.randint(0,1)
+    if gen == 1:
+        await ctx.send(content=numar + ", you won a trip to gulag")
+    else:
+        await ctx.send(content=numar + ", you lost blyat")
 
 @slash.slash(name="help", description="Shows this message")  # Slash command for /help
 async def _help(ctx: SlashContext):
