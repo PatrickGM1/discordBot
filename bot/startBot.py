@@ -71,13 +71,16 @@ async def _tabinet(ctx: SlashContext, numar: str = ""):
     numar = int(numar)
     await ctx.send(content="The government is choosing...")
     sleep(0.5)
-    numar = int(numar) + 1
+
+    gen = random.randint(0, 10)
+    genn = random.randint(0, 10)
+    numar = int(numar) + genn
     numar = str(numar)
-    gen = random.randint(0,1)
-    if gen == 1:
+    if gen % 2 == 1:
         await ctx.send(content=numar + ", you won a trip to gulag")
     else:
         await ctx.send(content=numar + ", you lost blyat")
+
 
 @slash.slash(name="help", description="Shows this message")  # Slash command for /help
 async def _help(ctx: SlashContext):
