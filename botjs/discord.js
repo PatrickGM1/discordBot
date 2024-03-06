@@ -1,52 +1,66 @@
-// Initialize dotenv
+// Load environment variables from .env file
 require('dotenv').config();
 
+// Import necessary classes and objects from discord.js library
+const { REST, Routes, Client, GatewayIntentBits, SlashCommandBuilder } = require('discord.js');
 
-// Discord.js versions ^13.0 require us to explicitly define client intents
-const { REST, Routes, Client, GatewayIntentBits, SlashCommandBuilder } = require('discord.js')
+// Initialize a new Discord client with specified intents
 const client = new Client({
     intents: [
-        GatewayIntentBits.Guilds,
-        //GatewayIntentBits.Guilds,
-        GatewayIntentBits.GuildMembers,
-        //GatewayIntentBits.GuildMessages,
-        //GatewayIntentBits.MessageContent,
-        // ...
+        GatewayIntentBits.Guilds, // Necessary for interacting with guilds (servers)
+        //GatewayIntentBits.Guilds, // Duplicate line, might be a mistake or placeholder for other intents
+        GatewayIntentBits.GuildMembers, // Necessary for interacting with guild members
+        //GatewayIntentBits.GuildMessages, // Commented out, used for receiving messages in guilds
+        //GatewayIntentBits.MessageContent, // Commented out, required for receiving message content
+        // ... Add more intents as needed
     ]
-})
+});
 
+// Listen for messages sent in any channel the bot has access to
+client.on('message', (message) => {
+  // Ignore messages from bots to prevent potential infinite loops or spam
+  if (message.author.bot) return false;
+
+  // Check if the message starts with the "!say" command
+  if (message.content.toLowerCase().startsWith('!say')) {
+    console.log("Command detected: !say");
+    // Ensure there is at least one mentioned member in the message
+    if (!message.mentions.members.size) return false;
+    // Reply in the channel with a playful message targeting the mentioned member
+    message.channel.send(`${message.mentions.members.first()} is a son of a cookie`);
+  }
+});
+
+// Placeholder for your guild ID
 const guildId = client.guilds.cache.get("YOUR_GUILD_ID");
+// Initialize REST client for interacting with Discord API
 const rest = new REST({ version: '10' }).setToken(process.env.TOKEN);
-  
-  client.on('ready', (c) => {
-    console.log(`✅ ${c.user.tag} is online.`);
-  });
-  
-  client.on('interactionCreate', (interaction) => {
-    if (!interaction.isChatInputCommand()) return;
-  
-    if (interaction.commandName === 'hey') {
-      return interaction.reply('hey!');
-    }
-  
-    if (interaction.commandName === 'ping') {
-      return interaction.reply('Pong!');
-    }
-    if (interaction.commandName == 'tabinet'){
-      const filter = m => m.author.id ===  message.author.id;
-        message.channel.awaitMessages(filter, {
-        max: 1, // leave this the same
-        time: 10000, // time in MS. there are 1000 MS in a second
-          }).then(async(collected) => {
-            if(collected.first().content == 'cancel'){
-            message.reply('Command cancelled.')
-        } 
-        console.log('collecred :' + collected.first().content)
-        }).catch(() => {
-            // what to do if a user takes too long goes here 
-        message.reply('You took too long! Goodbye!') 
-        });
-    }
-  });
-// Log In our bot
+
+// Log when the bot is successfully logged in and set up
+client.on('ready', (c) => {
+  console.log(`Bot is online: ${c.user.tag}`);
+});
+
+// Handle slash command interactions
+client.on('interactionCreate', (interaction) => {
+  // Ignore non-command interactions
+  if (!interaction.isChatInputCommand()) return;
+
+  // Respond to the "hey" command
+  if (interaction.commandName === 'hey') {
+    return interaction.reply('hey!');
+  }
+
+  // Respond to the "ping" command
+  if (interaction.commandName === 'ping') {
+    return interaction.reply('Pong!');
+  }
+
+  // Placeholder for a potential "tabinet" command
+  if (interaction.commandName == 'tabinet'){
+    // Command logic here
+  }
+});
+
+// Log the bot in using the token from .env file
 client.login(process.env.TOKEN);
