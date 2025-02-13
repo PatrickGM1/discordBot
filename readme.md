@@ -12,7 +12,7 @@ A simple yet powerful Discord bot with basic commands to enhance your server exp
 1. Clone the repository:
    ```sh
    git clone https://github.com/PatrickGM1/bot.git
-   cd discordBot/pythonProject
+   cd discordBot/code
    ```
 
 2. Install dependencies:
