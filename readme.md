@@ -2,10 +2,12 @@
 A simple yet powerful Discord bot with basic commands to enhance your server experience.
 
 ## 🚀 Features
-- 🎉 Basic commands (hi, milmoi, tabinet)
+- 🎉 Basic commands (hi, milmoi, guess)
 - 🛠 Moderation commands (kick, warn, ban, mute, unmute)
 - 🎭 Role management (automatic role assignment, mute/unmute)
 - 📜 Logging system
+- 🎮 Fun commands (coinflip, roll, rps)
+- 📊 Information commands (userinfo, serverinfo)
 
 ## 📦 Installation
 
@@ -32,15 +34,20 @@ A simple yet powerful Discord bot with basic commands to enhance your server exp
 
 ## 🛠 Commands
 | Command      | Description |
-|-------------|-------------|
-| `/hi`       | Says hi! |
-| `/milmoi`   | Says milmoi! |
-| `/tabinet`  | Play a number game |
-| `/kick`     | Kicks a user from the server. Usage: /kick @user [reason] |
-| `/warn`     | Warns a user. Usage: /warn @user [reason] |
-| `/ban`      | Bans a user from the server. Usage: /ban @user [reason] |
-| `/mute`     | Mutes a user. Usage: /mute @user |
-| `/unmute`   | Unmutes a user. Usage: /unmute @user |
+|--------------|-------------|
+| `/hi`        | Greets the user. |
+| `/milmoi`    | Sends a friendly greeting. |
+| `/guess`     | Play a number game. |
+| `/kick`      | Kicks a user from the server. Usage: /kick @user [reason] |
+| `/warn`      | Warns a user. Usage: /warn @user [reason] |
+| `/ban`       | Bans a user from the server. Usage: /ban @user [reason] |
+| `/mute`      | Mutes a user. Usage: /mute @user |
+| `/unmute`    | Unmutes a user. Usage: /unmute @user |
+| `/userinfo`  | Displays user information. Usage: /userinfo @user |
+| `/serverinfo`| Displays server information. |
+| `/coinflip`  | Flips a coin. |
+| `/roll`      | Rolls a dice. |
+| `/rps`       | Play Rock Paper Scissors. |
 
 ## 📜 License
 
