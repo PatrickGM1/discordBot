@@ -17,11 +17,13 @@ intents.members = True  # Enable member intents
 bot = Bot(command_prefix="!", intents=intents)
 slash = SlashCommand(bot, sync_commands=True)  # Enable slash commands
 
+
 # Bot startup
 @bot.event
 async def on_ready():
     print(f"{bot.user.name} is online and ready!")
     await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="User Commands"))
+
 
 # Error Handling
 @bot.event
@@ -29,10 +31,12 @@ async def on_command_error(ctx, error):
     if isinstance(error, MissingPermissions):
         await ctx.send("You don't have permission to do that.")
 
+
 @bot.event
 async def on_slash_command_error(ctx: SlashContext, error):
     if "missing_permissions" in str(error).lower():
         await ctx.send(content="You do not have permission to use this command!", hidden=True)
+
 
 # Welcome new members and assign a role
 @bot.event
@@ -47,14 +51,17 @@ async def on_member_join(member):
     if welcome_channel:
         await welcome_channel.send(f"Welcome {member.mention} to the server! We're happy to have you here.")
 
+
 # Basic commands
 @slash.slash(name="hi", description="Greets the user.")
 async def _hi(ctx: SlashContext):
     await ctx.send(content="Hello! How can I assist you today?")
 
+
 @slash.slash(name="milmoi", description="Sends a friendly greeting.")
 async def _milmoi(ctx: SlashContext):
     await ctx.send(content="Milmoi!")
+
 
 # Fun game command
 @slash.slash(name="guess", description="Guess a number game!", options=[
@@ -66,6 +73,7 @@ async def _guess(ctx: SlashContext, number: int):
     final_number = number + random_adjustment
     result = "You guessed correctly!" if final_number % 2 == 0 else "Better luck next time!"
     await ctx.send(content=f"The chosen number is **{final_number}**. {result}")
+
 
 # Help command
 @slash.slash(name="help", description="Displays available commands.")
@@ -84,6 +92,7 @@ async def _help(ctx: SlashContext):
     embed.add_field(name="/rps", value="Play Rock Paper Scissors.", inline=False)
     await ctx.send(embed=embed)
 
+
 # Moderation Commands
 @slash.slash(name="kick", description="Kick a user from the server", options=[
     create_option(name="user", description="The user to kick", option_type=6, required=True),
@@ -94,6 +103,7 @@ async def _kick(ctx: SlashContext, user: Member, reason: str = "No reason provid
     await user.kick(reason=reason)
     await ctx.send(f"{user.name} has been removed from the server. Reason: {reason}")
 
+
 @slash.slash(name="warn", description="Warn a user", options=[
     create_option(name="user", description="The user to warn", option_type=6, required=True),
     create_option(name="reason", description="Reason for warning", option_type=3, required=False)
@@ -101,6 +111,7 @@ async def _kick(ctx: SlashContext, user: Member, reason: str = "No reason provid
 @has_permissions(manage_messages=True)
 async def _warn(ctx: SlashContext, user: Member, reason: str = "No reason provided"):
     await ctx.send(f"{user.mention}, you have been warned for: {reason}")
+
 
 @slash.slash(name="ban", description="Ban a user from the server", options=[
     create_option(name="user", description="The user to ban", option_type=6, required=True),
@@ -110,6 +121,7 @@ async def _warn(ctx: SlashContext, user: Member, reason: str = "No reason provid
 async def _ban(ctx: SlashContext, user: Member, reason: str = "No reason provided"):
     await user.ban(reason=reason)
     await ctx.send(f"{user.name} has been banned from the server. Reason: {reason}")
+
 
 @slash.slash(name="mute", description="Mute a user", options=[
     create_option(name="user", description="The user to mute", option_type=6, required=True)
@@ -123,6 +135,7 @@ async def _mute(ctx: SlashContext, user: Member):
     else:
         await ctx.send("No 'Muted' role found. Please create a 'Muted' role.")
 
+
 @slash.slash(name="unmute", description="Unmute a user", options=[
     create_option(name="user", description="The user to unmute", option_type=6, required=True)
 ])
@@ -135,6 +148,7 @@ async def _unmute(ctx: SlashContext, user: Member):
     else:
         await ctx.send(f"{user.mention} is not muted.")
 
+
 # Utility Commands
 @slash.slash(name="serverinfo", description="Displays server information.")
 async def _serverinfo(ctx: SlashContext):
@@ -146,6 +160,7 @@ async def _serverinfo(ctx: SlashContext):
     embed.set_thumbnail(url=guild.icon_url)
     await ctx.send(embed=embed)
 
+
 @slash.slash(name="userinfo", description="Displays user information.", options=[
     create_option(name="user", description="User to view", option_type=6, required=True)
 ])
@@ -155,6 +170,7 @@ async def _userinfo(ctx: SlashContext, user: Member):
     embed.add_field(name="Joined Server", value=user.joined_at.strftime("%Y-%m-%d"), inline=True)
     embed.set_thumbnail(url=user.avatar_url)
     await ctx.send(embed=embed)
+
 
 # Run the bot
 bot_token = os.getenv('DISCORD_BOT_TOKEN')
