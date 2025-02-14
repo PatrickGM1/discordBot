@@ -16,7 +16,7 @@ slash = SlashCommand(bot, sync_commands=True)
 
 
 # List of cogs
-COGS = ["cogs.general", "cogs.moderation", "cogs.utility", "cogs.fun"]
+COGS = ["cogs.general", "cogs.moderation", "cogs.utility", "cogs.fun", "cogs.economy"]
 
 @bot.event
 async def on_ready():

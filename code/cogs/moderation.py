@@ -3,7 +3,7 @@ from discord.ext import commands
 from discord.ext.commands import has_permissions
 from discord_slash import cog_ext, SlashContext
 from discord_slash.utils.manage_commands import create_option
-from colors import FUN_COLOR, MODERATION_COLOR, UTILITY_COLOR, GENERAL_COLOR
+from other.colors import MODERATION_COLOR
 
 
 class Moderation(commands.Cog):

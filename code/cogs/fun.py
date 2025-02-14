@@ -3,7 +3,8 @@ import random
 from discord.ext import commands
 from discord_slash import cog_ext, SlashContext
 from discord_slash.utils.manage_commands import create_option
-from colors import FUN_COLOR, MODERATION_COLOR, UTILITY_COLOR, GENERAL_COLOR
+from other.colors import FUN_COLOR
+
 
 class Fun(commands.Cog):
     def __init__(self, bot):
