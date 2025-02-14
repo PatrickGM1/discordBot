@@ -48,7 +48,11 @@ A simple yet powerful Discord bot with basic commands to enhance your server exp
 | `/coinflip`  | Flips a coin. |
 | `/roll`      | Rolls a dice. |
 | `/rps`       | Play Rock Paper Scissors. |
-
+| `/balance`   | Shows your current balance. |
+| `/daily`     | Collect your daily reward. |
+| `/pay`       | Pay another user. Usage: /pay @user [amount] |
+| `/gamble`    | Gamble your balance. Usage: /gamble [amount] |
+| `/slots`     | Play a slot machine game. /slots [amount] |
 ## 📜 License
 
 This project is licensed under the [MIT License](LICENSE).
