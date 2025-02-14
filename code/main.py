@@ -16,7 +16,7 @@ slash = SlashCommand(bot, sync_commands=True)
 
 
 # List of cogs
-COGS = ["cogs.general", "cogs.moderation", "cogs.utility", "cogs.fun", "cogs.economy"]
+COGS = ["cogs.general", "cogs.moderation", "cogs.utility", "cogs.fun", "cogs.economy", "cogs.welcome"]
 
 @bot.event
 async def on_ready():
@@ -27,9 +27,6 @@ async def on_ready():
 # Load cogs
 for cog in COGS:
     bot.load_extension(cog)
-
-for command in slash.commands:
-    print(command)
 
 
 # Run the bot
