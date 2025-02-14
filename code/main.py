@@ -14,6 +14,7 @@ intents.members = True
 bot = commands.Bot(command_prefix="!", intents=intents, help_command=None)  # Slash commands don't need a prefix
 slash = SlashCommand(bot, sync_commands=True)
 
+
 # List of cogs
 COGS = ["cogs.general", "cogs.moderation", "cogs.utility", "cogs.fun"]
 
