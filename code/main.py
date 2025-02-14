@@ -172,6 +172,11 @@ async def _userinfo(ctx: SlashContext, user: Member):
     await ctx.send(embed=embed)
 
 
+@slash.slash(name="coinflip", description="Flips a coin.")
+async def _coinflip(ctx: SlashContext):
+    coin = random.choice(["Heads", "Tails"])
+    await ctx.send(f"The coin landed on: **{coin}**")
+
 # Run the bot
 bot_token = os.getenv('DISCORD_BOT_TOKEN')
 bot.run(bot_token)
