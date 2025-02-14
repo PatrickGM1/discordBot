@@ -35,6 +35,8 @@ class General(commands.Cog):
         embed.add_field(name="/work", value="Work and earn money.", inline=False)
         embed.add_field(name="/daily", value="Claim your daily reward.", inline=False)
         embed.add_field(name="/pay", value="Pay another user. Usage: /pay @user [amount]", inline=False)
+        embed.add_field(name="/gamble", value="Gamble your money. Usage: /gamble [amount]", inline=False)
+        embed.add_field(name="/slots", value="Play the slots game.", inline=False)
         await ctx.send(embed=embed)
 
 def setup(bot):

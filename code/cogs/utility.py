@@ -33,7 +33,6 @@ class Utility(commands.Cog):
         embed.add_field(name="Status", value=user.status, inline=True)
         embed.add_field(name="Joined", value=user.joined_at.strftime("%d/%m/%Y, %H:%M:%S"), inline=True)
         embed.add_field(name="Created", value=user.created_at.strftime("%d/%m/%Y, %H:%M:%S"), inline=True)
-        #show roles
         roles = [role for role in user.roles]
         roles.pop(0)
         roles.reverse()
