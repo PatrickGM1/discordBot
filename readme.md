@@ -19,7 +19,7 @@ A simple yet powerful Discord bot with basic commands to enhance your server exp
 
 2. Install dependencies:
    ```sh
-   pip install -r requirements.txt
+   pip install -r ceode/requirements.txt
    ```
 
 3. Set up your `.env` file:
