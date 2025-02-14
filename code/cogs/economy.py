@@ -60,7 +60,7 @@ class Economy(commands.Cog):
 
     @cog_ext.cog_slash(name="daily", description="Claim your daily reward.")
     async def _daily(self, ctx: SlashContext):
-        reward = 1000
+        reward = 100
         self.update_balance(ctx.author.id, reward)
         embed = discord.Embed(title="🎁 Daily Reward",
                               description=f"{ctx.author.mention}, you claimed your daily reward of **${reward}**!",
