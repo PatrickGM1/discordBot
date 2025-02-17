@@ -141,4 +141,4 @@ cython_debug/
 
 # Local environment variables
 .variables
-code/dataBases/
+code/dataBase/
