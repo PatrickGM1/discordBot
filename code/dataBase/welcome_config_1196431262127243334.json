@@ -1,8 +1,0 @@
-{
-    "welcome_channel": 1339966731858481223,
-    "welcome_role": 1196433663848628244,
-    "welcome_message": "welcome",
-    "leave_channel": 1339966731858481223,
-    "leave_enabled": true,
-    "leave_message": "bye \ud83d\ude2d"
-}
